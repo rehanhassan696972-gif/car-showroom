@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRESTIGE MOTORS | Curating the Extraordinary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0B0B0B',
+                        pure: '#FFFFFF',
+                        silver: '#C0C0C0',
+                        metallic: '#8A8A8A',
+                        electric: '#E31837',
+                    },
+                    fontFamily: {
+                        oswald: ['Oswald', 'sans-serif'],
+                        cormorant: ['Cormorant Garamond', 'serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0B0B0B;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0B0B0B;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #8A8A8A;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C0C0C0;
+        }
+
+        /* Magnetic Button Effect */
+        .magnetic-btn {
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Hero Video Overlay */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(11, 11, 11, 0.3) 0%, rgba(11, 11, 11, 0.7) 100%);
+        }
+
+        /* Vehicle Card Hover Effect */
+        .vehicle-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .vehicle-card .primary-img {
+            transition: opacity 0.5s ease;
+        }
+
+        .vehicle-card .secondary-img {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .vehicle-card:hover .primary-img {
+            opacity: 0;
+        }
+
+        .vehicle-card:hover .secondary-img {
+            opacity: 1;
+        }
+
+        /* Ribbon Styles */
+        .ribbon {
+            position: absolute;
+            top: 20px;
+            left: -35px;
+            transform: rotate(-45deg);
+            width: 150px;
+            text-align: center;
+            padding: 5px 0;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        /* Navigation Hide/Show on Scroll */
+        .nav-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Filter Panel */
+        .filter-panel {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Parallax Effect */
+        .parallax-img {
+            transition: transform 0.1s linear;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Sticky Inquire Button */
+        .sticky-inquire {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .sticky-inquire.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Form Styles */
+        input, select, textarea {
+            background: transparent;
+            border: 1px solid #8A8A8A;
+            color: #FFFFFF;
+            padding: 15px 20px;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #FFFFFF;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #8A8A8A;
+        }
+
+        /* Blog Card */
+        .blog-card {
+            transition: all 0.4s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Service Icon Animation */
+        .service-icon {
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+            color: #E31837;
+        }
+
+        /* Sold Archive Grayscale */
+        .sold-img {
+            filter: grayscale(100%);
+            transition: filter 0.4s ease;
+        }
+
+        .sold-card:hover .sold-img {
+            filter: grayscale(0%);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0B0B0B;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #8A8A8A;
+            border-top-color: #FFFFFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Animate on Scroll */
+        .aos-fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .aos-fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            background: #25D366;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="absolute top-8 right-8 text-white text-3xl hover:text-silver transition-colors" onclick="closeLightbox()">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="absolute left-8 text-white text-3xl hover:text-silver transition-colors" onclick="prevImage()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <img src="" alt="Lightbox Image" id="lightboxImg">
+        <button class="absolute right-8 text-white text-3xl hover:text-silver transition-colors" onclick="nextImage()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500" id="mainNav">
+        <div class="bg-obsidian/90 backdrop-blur-md border-b border-metallic/20">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <!-- Logo -->
+                    <a href="#" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 border border-silver flex items-center justify-center">
+                            <span class="font-oswald font-bold text-lg">PM</span>
+                        </div>
+                        <span class="font-cormorant text-xl tracking-widest hidden sm:block">PRESTIGE MOTORS</span>
+                    </a>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden lg:flex items-center space-x-10">
+                        <a href="#collection" class="font-inter text-xs tracking-widest uppercase hover:text-silver transition-colors">Collection</a>
+                        <a href="#heritage" class="font-inter text-xs tracking-widest uppercase hover:text-silver transition-colors">Heritage</a>
+                        <a href="#sold" class="font-inter text-xs tracking-widest uppercase hover:text-silver transition-colors">Sold</a>
+                        <a href="#services" class="font-inter text-xs tracking-widest uppercase hover:text-silver transition-colors">Services</a>
+                        <a href="#insights" class="font-inter text-xs tracking-widest uppercase hover:text-silver transition-colors">Insights</a>
+                       <a href="https://wa.me/923120696972?text=Hello%20Prestige%20Motors%2C%20I%20am%20interested%20in%20inquiring%20about%20a%20vehicle%20in%20your%20collection." 
+   target="_blank" 
+   class="magnetic-btn bg-electric text-white px-6 py-3 font-inter text-xs tracking-widest uppercase hover:bg-white hover:text-obsidian transition-all">
+    Inquire Now
+</a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="lg:hidden text-white text-2xl" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars" id="menuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed top-0 right-0 w-full h-full bg-obsidian z-[60] flex flex-col" id="mobileMenu">
+        <div class="flex justify-between items-center p-6 border-b border-metallic/20">
+            <span class="font-cormorant text-xl tracking-widest">MENU</span>
+            <button onclick="toggleMobileMenu()" class="text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex-1 flex flex-col justify-center items-center space-y-8 p-6">
+            <a href="#collection" onclick="toggleMobileMenu()" class="font-oswald text-3xl tracking-widest uppercase hover:text-silver transition-colors">Collection</a>
+            <a href="#heritage" onclick="toggleMobileMenu()" class="font-oswald text-3xl tracking-widest uppercase hover:text-silver transition-colors">Heritage</a>
+            <a href="#sold" onclick="toggleMobileMenu()" class="font-oswald text-3xl tracking-widest uppercase hover:text-silver transition-colors">Sold</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="font-oswald text-3xl tracking-widest uppercase hover:text-silver transition-colors">Services</a>
+            <a href="#insights" onclick="toggleMobileMenu()" class="font-oswald text-3xl tracking-widest uppercase hover:text-silver transition-colors">Insights</a>
+        </div>
+        <div class="p-6 border-t border-metallic/20">
+            <a href="#contact" onclick="toggleMobileMenu()" class="block w-full bg-electric text-center py-4 font-inter text-sm tracking-widest uppercase">
+                Inquire Now
+            </a>
+            <div class="flex justify-center space-x-6 mt-6">
+                <button class="text-silver hover:text-white transition-colors" onclick="openSearch()">
+                    <i class="fas fa-search text-xl"></i>
+                </button>
+                <button class="text-silver hover:text-white transition-colors" onclick="openFilter()">
+                    <i class="fas fa-sliders-h text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen overflow-hidden">
+        <!-- Video Background (Simulated with Image) -->
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1920&q=80" alt="Luxury Car" class="w-full h-full object-cover">
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-10 h-full flex flex-col justify-center items-center text-center px-6">
+            <p class="font-inter text-xs tracking-[0.4em] text-silver mb-6 aos-fade-up">ESTABLISHED MDCCCLXXXVIII</p>
+            <h1 class="font-cormorant text-5xl md:text-7xl lg:text-8xl font-light italic mb-8 aos-fade-up" style="transition-delay: 0.1s;">
+                Curating the Extraordinary
+            </h1>
+            <p class="font-inter text-sm text-silver max-w-xl mb-12 aos-fade-up" style="transition-delay: 0.2s;">
+                Europe's premier destination for the world's most coveted automobiles. Each vehicle, a masterpiece of engineering and design.
+            </p>
+            <a href="#collection" class="magnetic-btn bg-electric text-white px-10 py-4 font-inter text-xs tracking-widest uppercase hover:bg-white hover:text-obsidian transition-all aos-fade-up" style="transition-delay: 0.3s;">
+                View Current Collection
+            </a>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <span class="font-inter text-[10px] tracking-widest text-silver mb-4">SCROLL</span>
+            <div class="w-[1px] h-16 bg-gradient-to-b from-silver to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- Live Inventory Boutique -->
+    <section id="collection" class="py-24 lg:py-32 bg-obsidian">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16 aos-fade-up">
+                <p class="font-inter text-xs tracking-[0.3em] text-metallic mb-4">THE COLLECTION</p>
+                <h2 class="font-cormorant text-4xl md:text-5xl lg:text-6xl font-light italic mb-6">Current Inventory</h2>
+                <div class="w-20 h-[1px] bg-silver mx-auto"></div>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 aos-fade-up">
+                <select id="filterBrand" class="bg-obsidian border border-metallic/50 px-6 py-3 font-inter text-xs tracking-wider uppercase focus:border-white cursor-pointer" onchange="filterInventory()">
+                    <option value="">All Brands</option>
+                    <option value="ferrari">Ferrari</option>
+                    <option value="lamborghini">Lamborghini</option>
+                    <option value="porsche">Porsche</option>
+                    <option value="mclaren">McLaren</option>
+                    <option value="mercedes">Mercedes-AMG</option>
+                    <option value="aston">Aston Martin</option>
+                </select>
+                <select id="filterBody" class="bg-obsidian border border-metallic/50 px-6 py-3 font-inter text-xs tracking-wider uppercase focus:border-white cursor-pointer" onchange="filterInventory()">
+                    <option value="">Body Style</option>
+                    <option value="coupe">Coupé</option>
+                    <option value="convertible">Convertible</option>
+                    <option value="suv">SUV</option>
+                    <option value="sedan">Sedan</option>
+                </select>
+                <select id="filterEngine" class="bg-obsidian border border-metallic/50 px-6 py-3 font-inter text-xs tracking-wider uppercase focus:border-white cursor-pointer" onchange="filterInventory()">
+                    <option value="">Engine Type</option>
+                    <option value="v8">V8</option>
+                    <option value="v10">V10</option>
+                    <option value="v12">V12</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
+                <select id="filterPrice" class="bg-obsidian border border-metallic/50 px-6 py-3 font-inter text-xs tracking-wider uppercase focus:border-white cursor-pointer" onchange="filterInventory()">
+                    <option value="">Price Range</option>
+                    <option value="0-500000">Up to €500,000</option>
+                    <option value="500000-1000000">€500,000 - €1,000,000</option>
+                    <option value="1000000+">€1,000,000+</option>
+                </select>
+            </div>
+
+            <!-- Vehicle Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="vehicleGrid">
+                <!-- Vehicle Card 1 -->
+                <div class="vehicle-card group cursor-pointer aos-fade-up" data-brand="ferrari" data-body="coupe" data-engine="v12" data-price="850000" onclick="openLightbox(0)">
+                    <div class="relative overflow-hidden mb-4">
+                        <div class="ribbon bg-electric text-white font-inter font-medium">New Arrival</div>
+                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80" alt="Ferrari 812" class="primary-img w-full h-80 object-cover absolute inset-0">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80" alt="Ferrari 812 Interior" class="secondary-img w-full h-80 object-cover">
+                        <div class="absolute bottom-4 left-4 right-4 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="bg-obsidian/80 backdrop-blur-sm px-3 py-1 font-inter text-[10px] tracking-wider">VAT QUALIFYING</span>
+                            <span class="bg-obsidian/80 backdrop-blur-sm px-3 py-1 font-inter text-[10px] tracking-wider">WARRANTY</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="font-inter text-xs text-metallic tracking-wider">2023 • 1,200 KM</p>
+                        <h3 class="font-oswald text-xl tracking-wide">FERRARI 812 COMPETIZIONE</h3>
+                        <p class="font-cormorant text-2xl text-silver italic">€850,000</p>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 2 -->
+                <div class="vehicle-card group cursor-pointer aos-fade-up" data-brand="lamborghini" data-body="coupe" data-engine="v10" data-price="420000" onclick="openLightbox(1)" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?w=800&q=80" alt="Lamborghini Huracan" class="primary-img w-full h-80 object-cover absolute inset-0">
+                        <img src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?w=800&q=80" alt="Lamborghini Interior" class="secondary-img w-full h-80 object-cover">
+                        <div class="absolute bottom-4 left-4 right-4 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="bg-obsidian/80 backdrop-blur-sm px-3 py-1 font-inter text-[10px] tracking-wider">VAT QUALIFYING</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="font-inter text-xs text-metallic tracking-wider">2024 • 850 KM</p>
+                        <h3 class="font-oswald text-xl tracking-wide">LAMBORGHINI HURACÁN TECNICA</h3>
+                        <p class="font-cormorant text-2xl text-silver italic">€420,000</p>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 3 -->
+                <div class="vehicle-card group cursor-pointer aos-fade-up" data-brand="porsche" data-body="coupe" data-engine="hybrid" data-price="1250000" onclick="openLightbox(2)" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden mb-4">
+                        <div class="ribbon bg-amber-500 text-obsidian font-inter font-medium">Under Offer</div>
+                        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&q=80" alt="Porsche 918" class="primary-img w-full h-80 object-cover absolute inset-0">
+                        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80" alt="Porsche Interior" class="secondary-img w-full h-80 object-cover">
+                    </div>
+                    <div class="space-y-2">
+                        <p class="font-inter text-xs text-metallic tracking-wider">2015 • 4,500 KM</p>
+                        <h3 class="font-oswald text-xl tracking-wide">PORSCHE 918 SPYDER</h3>
+                        <p class="font-cormorant text-2xl text-silver italic">Inquire for Price</p>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 4 -->
+                <div class="vehicle-card group cursor-pointer aos-fade-up" data-brand="mclaren" data-body="coupe" data-engine="v8" data-price="380000" onclick="openLightbox(3)">
+                    <div class="relative overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1621135802920-133df287f89c?w=800&q=80" alt="McLaren 720S" class="primary-img w-full h-80 object-cover absolute inset-0">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80" alt="McLaren Interior" class="secondary-img w-full h-80 object-cover">
+                        <div class="absolute bottom-4 left-4 right-4 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="bg-obsidian/80 backdrop-blur-sm px-3 py-1 font-inter text-[10px] tracking-wider">FULL SERVICE</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="font-inter text-xs text-metallic tracking-wider">2022 • 8,200 KM</p>
+                        <h3 class="font-oswald text-xl tracking-wide">MCLAREN 720S SPIDER</h3>
+                        <p class="font-cormorant text-2xl text-silver italic">€380,000</p>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 5 -->
+                <div class="vehicle-card group cursor-pointer aos-fade-up" data-brand="mercedes" data-body="coupe" data-engine="v8" data-price="320000" onclick="openLightbox(4)" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden mb-4">
+                        <div class="ribbon bg-electric text-white font-inter font-medium">New Arrival</div>
+                        <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80" alt="Mercedes AMG GT" class="primary-img w-full h-80 object-cover absolute inset-0">
+                        <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?w=800&q=80" alt="Mercedes Interior" class="secondary-img w-full h-80 object-cover">
+                    </div>
+                    <div class="space-y-2">
+                        <p class="font-inter text-xs text-metallic tracking-wider">2024 • 500 KM</p>
+                        <h3 class="font-oswald text-xl tracking-wide">MERCEDES-AMG GT BLACK SERIES</h3>
+                        <p class="font-cormorant text-2xl text-silver italic">€620,000</p>
+                    </div>
+                </div>
+
+                <!-- Vehicle Card 6 -->
+                <div class="vehicle-card group cursor-pointer aos-fade-up" data-brand="aston" data-body="coupe" data-engine="v12" data-price="750000" onclick="openLightbox(5)" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1693601255981-21ad394b14ef?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGV4dXMlMjBjYXJ8ZW58MHx8MHx8fDA%3D" alt="Aston Martin DBS" class="primary-img w-full h-80 object-cover absolute inset-0">
+                        <img src="https://images.unsplash.com/photo-1493238792000-8113da705763?w=800&q=80" alt="Aston Martin Interior" class="secondary-img w-full h-80 object-cover">
+                        <div class="absolute bottom-4 left-4 right-4 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span class="bg-obsidian/80 backdrop-blur-sm px-3 py-1 font-inter text-[10px] tracking-wider">WARRANTY</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="font-inter text-xs text-metallic tracking-wider">2023 • 3,100 KM</p>
+                        <h3 class="font-oswald text-xl tracking-wide">ASTON MARTIN DBS SUPERLEGGERA</h3>
+                        <p class="font-cormorant text-2xl text-silver italic">€350,000</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View All Button -->
+            <div class="text-center mt-16 aos-fade-up">
+                <a href="#" class="magnetic-btn inline-block border border-silver px-12 py-4 font-inter text-xs tracking-widest uppercase hover:bg-white hover:text-obsidian transition-all">
+                    View Complete Inventory
+                </a>
+            </div>
+        </div>
+    </section>
+
+   <!-- The Showroom Heritage -->
+<section id="heritage" class="py-24 lg:py-32 bg-pure text-obsidian">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            
+            <!-- Video Side -->
+            <div class="relative aos-fade-up">
+                <!-- Replace 'heritage-video.mp4' with your actual filename -->
+                <video 
+                    src="showroom.mp4" 
+                    autoplay 
+                    loop 
+                    muted 
+                    playsinline 
+                    class="w-full h-[600px] object-cover shadow-2xl">
+                </video>
+                
+                <div class="absolute -bottom-8 -right-8 bg-obsidian text-white p-8 hidden lg:block">
+                    <p class="font-oswald text-4xl font-light">35+</p>
+                    <p class="font-inter text-xs tracking-widest uppercase text-silver">Years of Excellence</p>
+                </div>
+            </div>
+
+            <!-- Content Side -->
+            <div class="lg:pl-8 aos-fade-up" style="transition-delay: 0.2s;">
+                <p class="font-inter text-xs tracking-[0.3em] text-metallic mb-4">OUR HERITAGE</p>
+                <h2 class="font-cormorant text-4xl md:text-5xl font-light italic mb-8">The Prestige Motors Story</h2>
+                <div class="w-20 h-[1px] bg-obsidian mb-8"></div>
+                
+                <div class="space-y-6 font-inter text-sm leading-relaxed text-metallic">
+                    <p>
+                        Established in the heart of Monaco in 1988, Prestige Motors has evolved into Europe's most distinguished purveyor of automotive excellence. Our journey began with a singular vision: to curate the world's most exceptional automobiles for discerning collectors who appreciate the intersection of engineering mastery and artistic design.
+                    </p>
+                    <p>
+                        Today, our 25,000 square-foot showroom serves as a sanctuary for automotive artistry. Each vehicle within our collection has been meticulously sourced, verified, and prepared to the highest standards. We maintain direct relationships with manufacturers, private collectors, and automotive connoisseurs across six continents.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 mt-12">
+                    <div>
+                        <p class="font-oswald text-3xl font-light mb-2">€2.8B+</p>
+                        <p class="font-inter text-xs tracking-widest uppercase text-metallic">Transactions Handled</p>
+                    </div>
+                    <div>
+                        <p class="font-oswald text-3xl font-light mb-2">94</p>
+                        <p class="font-inter text-xs tracking-widest uppercase text-metallic">Countries Served</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+                    <div class="flex flex-wrap gap-4 mt-12">
+                        <a href="#contact" class="magnetic-btn bg-obsidian text-white px-8 py-4 font-inter text-xs tracking-widest uppercase hover:bg-electric transition-all">
+                            Schedule Private Viewing
+                        </a>
+                        <a href="#" class="magnetic-btn border border-obsidian px-8 py-4 font-inter text-xs tracking-widest uppercase hover:bg-obsidian hover:text-white transition-all">
+                            Our Story
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sold Archive -->
+    <section id="sold" class="py-24 lg:py-32 bg-obsidian border-t border-metallic/20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16 aos-fade-up">
+                <p class="font-inter text-xs tracking-[0.3em] text-metallic mb-4">TRUST & TRACK RECORD</p>
+                <h2 class="font-cormorant text-4xl md:text-5xl lg:text-6xl font-light italic mb-6">Recently Acquired</h2>
+                <p class="font-inter text-sm text-metallic max-w-2xl mx-auto">A selection of exceptional automobiles that have found their forever homes through Prestige Motors.</p>
+                <div class="w-20 h-[1px] bg-silver mx-auto mt-6"></div>
+            </div>
+
+            <!-- Sold Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="sold-card group aos-fade-up">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=400&q=80" alt="Sold Ferrari" class="sold-img w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-obsidian/50 flex items-center justify-center">
+                            <span class="font-oswald text-lg tracking-widest text-white border border-white px-4 py-2">SOLD</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="font-inter text-[10px] text-metallic tracking-wider">2022</p>
+                        <p class="font-oswald text-sm tracking-wide">FERRARI SF90 STRADALE</p>
+                        <p class="font-cormorant text-silver italic">€680,000</p>
+                    </div>
+                </div>
+
+                <div class="sold-card group aos-fade-up" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=400&q=80" alt="Sold Porsche" class="sold-img w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-obsidian/50 flex items-center justify-center">
+                            <span class="font-oswald text-lg tracking-widest text-white border border-white px-4 py-2">SOLD</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="font-inter text-[10px] text-metallic tracking-wider">2024</p>
+                        <p class="font-oswald text-sm tracking-wide">PORSCHE 911 GT3 RS</p>
+                        <p class="font-cormorant text-silver italic">€380,000</p>
+                    </div>
+                </div>
+
+                <div class="sold-card group aos-fade-up" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=400&q=80" alt="Sold Bentley" class="sold-img w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-obsidian/50 flex items-center justify-center">
+                            <span class="font-oswald text-lg tracking-widest text-white border border-white px-4 py-2">SOLD</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="font-inter text-[10px] text-metallic tracking-wider">2023</p>
+                        <p class="font-oswald text-sm tracking-wide">BENTLEY CONTINENTAL GT</p>
+                        <p class="font-cormorant text-silver italic">€285,000</p>
+                    </div>
+                </div>
+
+                <div class="sold-card group aos-fade-up" style="transition-delay: 0.3s;">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?w=400&q=80" alt="Sold Rolls Royce" class="sold-img w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-obsidian/50 flex items-center justify-center">
+                            <span class="font-oswald text-lg tracking-widest text-white border border-white px-4 py-2">SOLD</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="font-inter text-[10px] text-metallic tracking-wider">2023</p>
+                        <p class="font-oswald text-sm tracking-wide">ROLLS-ROYCE CULLINAN</p>
+                        <p class="font-cormorant text-silver italic">€520,000</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-metallic/20">
+                <div class="text-center aos-fade-up">
+                    <p class="font-oswald text-4xl font-light mb-2">847</p>
+                    <p class="font-inter text-xs tracking-widest uppercase text-metallic">Vehicles Sold 2024</p>
+                </div>
+                <div class="text-center aos-fade-up" style="transition-delay: 0.1s;">
+                    <p class="font-oswald text-4xl font-light mb-2">€3.2M</p>
+                    <p class="font-inter text-xs tracking-widest uppercase text-metallic">Highest Sale</p>
+                </div>
+                <div class="text-center aos-fade-up" style="transition-delay: 0.2s;">
+                    <p class="font-oswald text-4xl font-light mb-2">12</p>
+                    <p class="font-inter text-xs tracking-widest uppercase text-metallic">Days Avg. Sale Time</p>
+                </div>
+                <div class="text-center aos-fade-up" style="transition-delay: 0.3s;">
+                    <p class="font-oswald text-4xl font-light mb-2">98%</p>
+                    <p class="font-inter text-xs tracking-widest uppercase text-metallic">Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 360° Concierge Services -->
+    <section id="services" class="py-24 lg:py-32 bg-pure text-obsidian">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16 aos-fade-up">
+                <p class="font-inter text-xs tracking-[0.3em] text-metallic mb-4">CONCIERGE SERVICES</p>
+                <h2 class="font-cormorant text-4xl md:text-5xl lg:text-6xl font-light italic mb-6">White-Glove Experience</h2>
+                <p class="font-inter text-sm text-metallic max-w-2xl mx-auto">Beyond acquisition, we offer a comprehensive suite of services designed for the discerning collector.</p>
+                <div class="w-20 h-[1px] bg-obsidian mx-auto mt-6"></div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-3 gap-12 lg:gap-16">
+                <!-- Service 1 -->
+                <div class="service-card text-center aos-fade-up">
+                    <div class="service-icon inline-flex items-center justify-center w-20 h-20 border border-metallic mb-8">
+                        <i class="fas fa-coins text-2xl text-metallic"></i>
+                    </div>
+                    <h3 class="font-oswald text-xl tracking-wide mb-4">BESPOKE FINANCING</h3>
+                    <p class="font-inter text-sm text-metallic leading-relaxed">
+                        Tailored financial solutions through our network of private banks and specialized lenders. Competitive rates with flexible terms designed for high-value acquisitions.
+                    </p>
+                    <a href="#contact" class="inline-block mt-6 font-inter text-xs tracking-widest uppercase border-b border-obsidian pb-1 hover:border-electric hover:text-electric transition-colors">
+                        Learn More
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card text-center aos-fade-up" style="transition-delay: 0.1s;">
+                    <div class="service-icon inline-flex items-center justify-center w-20 h-20 border border-metallic mb-8">
+                        <i class="fas fa-globe text-2xl text-metallic"></i>
+                    </div>
+                    <h3 class="font-oswald text-xl tracking-wide mb-4">WORLDWIDE SHIPPING</h3>
+                    <p class="font-inter text-sm text-metallic leading-relaxed">
+                        Enclosed transport and air freight to any destination worldwide. Full insurance coverage, customs documentation, and door-to-door delivery with real-time tracking.
+                    </p>
+                    <a href="#contact" class="inline-block mt-6 font-inter text-xs tracking-widest uppercase border-b border-obsidian pb-1 hover:border-electric hover:text-electric transition-colors">
+                        Get Quote
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card text-center aos-fade-up" style="transition-delay: 0.2s;">
+                    <div class="service-icon inline-flex items-center justify-center w-20 h-20 border border-metallic mb-8">
+                        <i class="fas fa-handshake text-2xl text-metallic"></i>
+                    </div>
+                    <h3 class="font-oswald text-xl tracking-wide mb-4">CONSIGNMENT EXCELLENCE</h3>
+                    <p class="font-inter text-sm text-metallic leading-relaxed">
+                        Maximum exposure for your vehicle through our global network. Professional photography, strategic marketing, and access to our qualified buyer database.
+                    </p>
+                    <a href="#contact" class="inline-block mt-6 font-inter text-xs tracking-widest uppercase border-b border-obsidian pb-1 hover:border-electric hover:text-electric transition-colors">
+                        Consign Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-16 border-t border-metallic/20">
+                <div class="text-center aos-fade-up">
+                    <i class="fas fa-search text-2xl text-metallic mb-4"></i>
+                    <p class="font-oswald text-sm tracking-wide">VEHICLE SOURCING</p>
+                </div>
+                <div class="text-center aos-fade-up" style="transition-delay: 0.1s;">
+                    <i class="fas fa-clipboard-check text-2xl text-metallic mb-4"></i>
+                    <p class="font-oswald text-sm tracking-wide">PRE-PURCHASE INSPECTION</p>
+                </div>
+                <div class="text-center aos-fade-up" style="transition-delay: 0.2s;">
+                    <i class="fas fa-warehouse text-2xl text-metallic mb-4"></i>
+                    <p class="font-oswald text-sm tracking-wide">CLIMATE STORAGE</p>
+                </div>
+                <div class="text-center aos-fade-up" style="transition-delay: 0.3s;">
+                    <i class="fas fa-car-side text-2xl text-metallic mb-4"></i>
+                    <p class="font-oswald text-sm tracking-wide">PART EXCHANGE</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Insight Blog -->
+    <section id="insights" class="py-24 lg:py-32 bg-obsidian border-t border-metallic/20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
+                <div class="aos-fade-up">
+                    <p class="font-inter text-xs tracking-[0.3em] text-metallic mb-4">THE JOURNAL</p>
+                    <h2 class="font-cormorant text-4xl md:text-5xl font-light italic">Automotive Insights</h2>
+                </div>
+                <a href="#" class="magnetic-btn mt-6 md:mt-0 inline-block border border-silver px-8 py-3 font-inter text-xs tracking-widest uppercase hover:bg-white hover:text-obsidian transition-all aos-fade-up">
+                    View All Articles
+                </a>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Card 1 -->
+                <article class="blog-card group aos-fade-up">
+                    <div class="relative overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=600&q=80" alt="Ferrari Article" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-electric text-white px-3 py-1 font-inter text-[10px] tracking-wider uppercase">Featured</span>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="font-inter text-[10px] text-metallic tracking-wider uppercase">Market Analysis • 3 Min Read</p>
+                        <h3 class="font-oswald text-xl tracking-wide group-hover:text-silver transition-colors">The Rise of Limited Production: Understanding Ferrari's New Strategy</h3>
+                        <p class="font-inter text-sm text-metallic leading-relaxed">An in-depth analysis of how limited production runs are reshaping the collector market and investment landscape...</p>
+                        <a href="#" class="inline-block font-inter text-xs tracking-widest uppercase border-b border-silver pb-1 hover:border-electric transition-colors mt-4">
+                            Read Article
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Card 2 -->
+                <article class="blog-card group aos-fade-up" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600&q=80" alt="New Arrival" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 left-4 bg-white text-obsidian px-3 py-1 font-inter text-[10px] tracking-wider uppercase">New Arrival</span>
+                    </div>
+                    <div class="space-y-3">
+                        <p class="font-inter text-[10px] text-metallic tracking-wider uppercase">Featured Arrival • Just Listed</p>
+                        <h3 class="font-oswald text-xl tracking-wide group-hover:text-silver transition-colors">Sculpted in Maranello: The 2024 Ferrari 296 GTB Assetto Fiorano</h3>
+                        <p class="font-inter text-sm text-metallic leading-relaxed">A comprehensive walkaround of our latest acquisition, featuring the revolutionary V6 hybrid powertrain...</p>
+                        <a href="#" class="inline-block font-inter text-xs tracking-widest uppercase border-b border-silver pb-1 hover:border-electric transition-colors mt-4">
+                            View Details
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Blog Card 3 -->
+                <article class="blog-card group aos-fade-up" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1547038577-da80abbc4f19?w=600&q=80" alt="Investment Guide" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="space-y-3">
+                        <p class="font-inter text-[10px] text-metallic tracking-wider uppercase">Investment • 8 Min Read</p>
+                        <h3 class="font-oswald text-xl tracking-wide group-hover:text-silver transition-colors">Collector's Guide: Top 5 Appreciating Supercars for 2025</h3>
+                        <p class="font-inter text-sm text-metallic leading-relaxed">Our experts analyze market trends and identify vehicles poised for significant appreciation in the coming years...</p>
+                        <a href="#" class="inline-block font-inter text-xs tracking-widest uppercase border-b border-silver pb-1 hover:border-electric transition-colors mt-4">
+                            Read Guide
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+   <section id="contact" class="py-24 lg:py-32 bg-obsidian border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-20 items-start">
+            
+            <!-- Branding Side -->
+            <div class="space-y-8">
+                <div>
+                    <p class="font-inter text-[10px] tracking-[0.5em] text-metallic mb-6 uppercase font-bold">Get In Touch</p>
+                    <h2 class="font-cormorant text-6xl md:text-8xl font-light italic leading-tight mb-8">
+                        Request a <br>Private <br>Consultation
+                    </h2>
+                    <div class="w-16 h-[1px] bg-electric"></div>
+                </div>
+                
+                <div class="pt-8">
+                    <p class="text-metallic text-sm font-light leading-loose max-w-sm italic">
+                        Our specialists are available for worldwide sourcing and private viewings. Expect a response within 24 business hours.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Modern Underline Form -->
+            <div class="bg-[#0D0D0D] p-8 md:p-12 shadow-2xl border border-white/5">
+                <!-- Added onsubmit handler to trigger the script -->
+                <form id="contactForm" class="space-y-10" onsubmit="sendToWhatsApp(event)">
+                    
+                    <div class="grid md:grid-cols-2 gap-10">
+                        <div class="relative group">
+                            <input type="text" id="fname" required class="peer w-full bg-transparent border-b border-metallic/30 py-3 text-sm focus:outline-none focus:border-white transition-all placeholder-transparent">
+                            <label for="fname" class="absolute left-0 top-3 text-metallic text-[10px] tracking-widest uppercase transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-electric">First Name *</label>
+                        </div>
+                        <div class="relative group">
+                            <input type="text" id="lname" required class="peer w-full bg-transparent border-b border-metallic/30 py-3 text-sm focus:outline-none focus:border-white transition-all placeholder-transparent">
+                            <label for="lname" class="absolute left-0 top-3 text-metallic text-[10px] tracking-widest uppercase transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-electric">Last Name *</label>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <input type="email" id="email" required class="peer w-full bg-transparent border-b border-metallic/30 py-3 text-sm focus:outline-none focus:border-white transition-all placeholder-transparent">
+                        <label for="email" class="absolute left-0 top-3 text-metallic text-[10px] tracking-widest uppercase transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-electric">Email Address *</label>
+                    </div>
+
+                    <div class="relative group">
+                        <input type="tel" id="phone" class="peer w-full bg-transparent border-b border-metallic/30 py-3 text-sm focus:outline-none focus:border-white transition-all placeholder-transparent">
+                        <label for="phone" class="absolute left-0 top-3 text-metallic text-[10px] tracking-widest uppercase transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-electric">Phone (with country code)</label>
+                    </div>
+
+                    <div class="relative">
+                        <!-- Added id="inquiryType" -->
+                        <select id="inquiryType" required class="w-full bg-transparent border-b border-metallic/30 py-3 text-sm focus:outline-none focus:border-white text-silver appearance-none cursor-pointer">
+                            <option value="" disabled selected>Inquiry Type *</option>
+                            <option class="bg-obsidian" value="Vehicle Purchase">Vehicle Purchase</option>
+                            <option class="bg-obsidian" value="Consignment">Consignment</option>
+                            <option class="bg-obsidian" value="Vehicle Sourcing">Vehicle Sourcing</option>
+                            <option class="bg-obsidian" value="Private Viewing">Private Viewing</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-0 bottom-4 text-[10px] text-metallic pointer-events-none"></i>
+                    </div>
+
+                    <div class="relative group">
+                        <textarea id="message" rows="2" class="peer w-full bg-transparent border-b border-metallic/30 py-3 text-sm focus:outline-none focus:border-white transition-all placeholder-transparent resize-none"></textarea>
+                        <label for="message" class="absolute left-0 top-3 text-metallic text-[10px] tracking-widest uppercase transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-electric">Your Message...</label>
+                    </div>
+                    
+                    <div class="space-y-8 pt-4">
+                        <div class="flex items-start space-x-4 group cursor-pointer">
+                            <input type="checkbox" id="privacy" class="mt-1 accent-electric cursor-pointer h-3 w-3" required>
+                            <label for="privacy" class="font-inter text-[10px] text-metallic uppercase tracking-tighter leading-tight group-hover:text-silver transition-colors cursor-pointer">
+                                I agree to the Privacy Policy and consent to receiving communications from Prestige Motors.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="w-full bg-electric text-white py-5 font-inter text-[10px] tracking-[0.4em] uppercase font-bold hover:bg-white hover:text-obsidian transition-all duration-500 shadow-xl">
+                            Submit Inquiry
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- THE JAVASCRIPT LOGIC -->
+<script>
+function sendToWhatsApp(event) {
+    event.preventDefault(); // Prevents page from reloading
+
+    // 1. Get the values from the form
+    const fname = document.getElementById('fname').value;
+    const lname = document.getElementById('lname').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const inquiry = document.getElementById('inquiryType').value;
+    const msg = document.getElementById('message').value;
+
+    // 2. Set the client's WhatsApp number (e.g., 27123456789)
+    const whatsappNumber = "923120696972"; 
+
+    // 3. Format the message text
+    // %0A represents a new line
+    const text = "⭐ *NEW PRIVATE CONSULTATION REQUEST* ⭐" + "%0A%0A" +
+                 "*Name:* " + fname + " " + lname + "%0A" +
+                 "*Email:* " + email + "%0A" +
+                 "*Phone:* " + phone + "%0A" +
+                 "*Inquiry:* " + inquiry + "%0A" +
+                 "*Message:* " + msg;
+
+    // 4. Create the final URL
+    const url = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(text);
+
+    // 5. Open WhatsApp in a new tab
+    window.open(url, '_blank').focus();
+}
+</script>
+                    <!-- FLOATING WHATSAPP BUTTON (Bottom Right) -->
+<a href="https://wa.me/923120696972" target="_blank" 
+   class="fixed bottom-8 right-8 z-[100] flex items-center justify-center w-16 h-16 bg-[#25D366] text-white rounded-full shadow-2xl hover:scale-110 hover:rotate-6 transition-all duration-300 group">
+    <i class="fab fa-whatsapp text-3xl"></i>
+    <!-- Optional Tooltip -->
+    <span class="absolute right-20 bg-white text-black text-[10px] px-4 py-2 rounded-sm font-bold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">
+        Private Liaison
+    </span>
+</a>
+
+<!-- LOCATION & MAP SECTION -->
+<section class="py-24 bg-obsidian border-t border-white/5 px-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Address & Details (Left Side - 5 columns) -->
+            <div class="lg:col-span-5 space-y-10 order-2 lg:order-1">
+                <div>
+                    <p class="text-electric text-[10px] tracking-[0.5em] uppercase mb-4 font-bold">Visit Us</p>
+                    <h3 class="font-oswald text-3xl tracking-tighter mb-4 uppercase">Prestige Motors Monaco</h3>
+                    <p class="font-inter text-sm text-metallic leading-relaxed">
+                        27 Boulevard Princesse Charlotte<br>
+                        MC 98000 Monaco
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 border-t border-white/10 pt-10">
+                    <div>
+                        <p class="text-[9px] tracking-[0.3em] text-metallic uppercase mb-3">General Inquiry</p>
+                        <a href="tel:+377000000000" class="text-sm font-light hover:text-electric transition-all">+377 00 00 00 00</a>
+                    </div>
+                    <div>
+                        <p class="text-[9px] tracking-[0.3em] text-metallic uppercase mb-3">Private Email</p>
+                        <a href="mailto:enquiries@prestigemotors.mc" class="text-sm font-light hover:text-electric transition-all">enquiries@prestigemotors.mc</a>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="text-[9px] tracking-[0.3em] text-metallic uppercase mb-3">Showroom Hours</p>
+                    <p class="text-sm font-light text-silver">
+                        Monday — Saturday: 10:00 — 19:00<br>
+                        <span class="text-electric italic text-xs">Sunday: By Appointment Only</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Map (Right Side - 7 columns) -->
+            <div class="lg:col-span-7 order-1 lg:order-2">
+                <div class="relative h-[400px] w-full border border-white/10 grayscale invert opacity-80 hover:opacity-100 transition-opacity duration-700">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2884.775252068549!2d7.4195!3d43.7384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDQ0JzE4LjIiTiA3wrAyNScxMC4yIkU!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                    <!-- Luxury Overlay Border -->
+                    <div class="absolute inset-0 pointer-events-none border-[15px] border-obsidian/20"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+                        <!-- Social Links -->
+                        <div class="flex space-x-4 pt-4">
+                            <a href="#" class="w-10 h-10 border border-metallic flex items-center justify-center hover:border-white hover:bg-white hover:text-obsidian transition-all">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 border border-metallic flex items-center justify-center hover:border-white hover:bg-white hover:text-obsidian transition-all">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 border border-metallic flex items-center justify-center hover:border-white hover:bg-white hover:text-obsidian transition-all">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 border border-metallic flex items-center justify-center hover:border-white hover:bg-white hover:text-obsidian transition-all">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-obsidian border-t border-metallic/20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 border border-silver flex items-center justify-center">
+                            <span class="font-oswald font-bold text-lg">PM</span>
+                        </div>
+                        <span class="font-cormorant text-xl tracking-widest">PRESTIGE MOTORS</span>
+                    </div>
+                    <p class="font-inter text-sm text-metallic leading-relaxed">
+                        Europe's premier destination for extraordinary automobiles. Curating the world's finest vehicles since 1988.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <p class="font-oswald text-sm tracking-widest mb-6">EXPLORE</p>
+                    <ul class="space-y-3">
+                        <li><a href="#collection" class="font-inter text-sm text-metallic hover:text-white transition-colors">Current Collection</a></li>
+                        <li><a href="#sold" class="font-inter text-sm text-metallic hover:text-white transition-colors">Sold Archive</a></li>
+                        <li><a href="#services" class="font-inter text-sm text-metallic hover:text-white transition-colors">Our Services</a></li>
+                        <li><a href="#insights" class="font-inter text-sm text-metallic hover:text-white transition-colors">Journal</a></li>
+                        <li><a href="#heritage" class="font-inter text-sm text-metallic hover:text-white transition-colors">About Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <p class="font-oswald text-sm tracking-widest mb-6">SERVICES</p>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="font-inter text-sm text-metallic hover:text-white transition-colors">Vehicle Sourcing</a></li>
+                        <li><a href="#" class="font-inter text-sm text-metallic hover:text-white transition-colors">Consignment</a></li>
+                        <li><a href="#" class="font-inter text-sm text-metallic hover:text-white transition-colors">Finance Solutions</a></li>
+                        <li><a href="#" class="font-inter text-sm text-metallic hover:text-white transition-colors">Worldwide Shipping</a></li>
+                        <li><a href="#" class="font-inter text-sm text-metallic hover:text-white transition-colors">Storage</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <p class="font-oswald text-sm tracking-widest mb-6">LEGAL</p>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="font-inter text-sm text-metallic hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="font-inter text-sm text-metallic hover:text-white transition-colors">Terms & Conditions</a></li>
+                        <li><a href="#" class="font-inter text-sm text-metallic hover:text-white transition-colors">Cookie Policy</a></li>
+                        <li><a href="#" class="font-inter text-sm text-metallic hover:text-white transition-colors">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="flex flex-wrap justify-center gap-8 py-8 border-t border-b border-metallic/20 mb-8">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shield-alt text-metallic"></i>
+                    <span class="font-inter text-xs text-metallic tracking-wider">OFFICIAL EUROPEAN DEALER</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-certificate text-metallic"></i>
+                    <span class="font-inter text-xs text-metallic tracking-wider">ISO 9001 CERTIFIED</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle text-metallic"></i>
+                    <span class="font-inter text-xs text-metallic tracking-wider">MEMBER OF SUPERCAR DEALERS ASSOCIATION</span>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center">
+                <p class="font-inter text-xs text-metallic">
+                    © 2024 Prestige Motors Monaco. All Rights Reserved. Company Registration: MC 123456789
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Inquire Button (Mobile) -->
+    <div class="sticky-inquire lg:hidden" id="stickyInquire">
+        <a href="#contact" class="magnetic-btn flex items-center space-x-2 bg-electric text-white px-6 py-3 shadow-lg">
+            <i class="fas fa-envelope"></i>
+            <span class="font-inter text-xs tracking-widest uppercase">Inquire</span>
+        </a>
+    </div>
+
+    <script>
+        // Loading Animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Navigation Hide/Show on Scroll
+        let lastScroll = 0;
+        const nav = document.getElementById('mainNav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.classList.add('nav-hidden');
+            } else {
+                nav.classList.remove('nav-hidden');
+            }
+            
+            lastScroll = currentScroll;
+
+            // Sticky Inquire Button
+            const stickyBtn = document.getElementById('stickyInquire');
+            if (currentScroll > 500) {
+                stickyBtn.classList.add('visible');
+            } else {
+                stickyBtn.classList.remove('visible');
+            }
+
+            // Animate on Scroll
+            document.querySelectorAll('.aos-fade-up').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('active');
+            
+            if (menu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Lightbox Functionality
+        const images = [
+            'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1920&q=80',
+            'https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?w=1920&q=80',
+            'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=1920&q=80',
+            'https://images.unsplash.com/photo-1621135802920-133df287f89c?w=1920&q=80',
+            'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1920&q=80',
+            'https://images.unsplash.com/photo-1596909651608-31ab47cc7c32?w=1920&q=80'
+        ];
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = images[index];
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            document.getElementById('lightboxImg').src = images[currentImageIndex];
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            document.getElementById('lightboxImg').src = images[currentImageIndex];
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        });
+
+        // Click outside to close lightbox
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+
+        // Filter Inventory
+        function filterInventory() {
+            const brand = document.getElementById('filterBrand').value;
+            const body = document.getElementById('filterBody').value;
+            const engine = document.getElementById('filterEngine').value;
+            const price = document.getElementById('filterPrice').value;
+
+            const cards = document.querySelectorAll('.vehicle-card');
+
+            cards.forEach(card => {
+                let show = true;
+
+                if (brand && card.dataset.brand !== brand) show = false;
+                if (body && card.dataset.body !== body) show = false;
+                if (engine && card.dataset.engine !== engine) show = false;
+                
+                if (price) {
+                    const cardPrice = parseInt(card.dataset.price);
+                    if (price === '0-500000' && cardPrice > 500000) show = false;
+                    if (price === '500000-1000000' && (cardPrice < 500000 || cardPrice > 1000000)) show = false;
+                    if (price === '1000000+' && cardPrice < 1000000) show = false;
+                }
+
+                card.style.display = show ? 'block' : 'none';
+            });
+        }
+
+        // Magnetic Button Effect
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                this.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+            });
+
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SUBMITTING...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> INQUIRY SENT';
+                btn.classList.remove('bg-electric');
+                btn.classList.add('bg-green-600');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-green-600');
+                    btn.classList.add('bg-electric');
+                    btn.disabled = false;
+                    this.reset();
+                }, 3000);
+            }, 2000);
+        });
+
+        // Parallax Effect on Vehicle Images
+        document.querySelectorAll('.vehicle-card img').forEach(img => {
+            img.closest('.vehicle-card').addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                
+                img.style.transform = `scale(1.05) translate(${x * 10}px, ${y * 10}px)`;
+            });
+
+            img.closest('.vehicle-card').addEventListener('mouseleave', function() {
+                img.style.transform = 'scale(1) translate(0, 0)';
+            });
+        });
+
+        // Initialize AOS on load
+        document.querySelectorAll('.aos-fade-up').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 100) {
+                el.classList.add('visible');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
